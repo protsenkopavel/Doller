@@ -1,4 +1,4 @@
-package doller;
+package doller.domain;
 
 import java.math.BigDecimal;
 import java.time.Instant;

@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: doller
+
+server:
+  port: 8080
+
+logging:
+  level:
+    doller: INFO
+
+doller:
+  http:
+    timeout: 3s
+    retries: 2
+    retry-backoff: 200ms
+  stream:
+    sample: 250ms
+    buffer-size: 256
+  exchanges:
+    - name: binance
+      symbol: BTC/USDT
+      url: "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+      interval: 1s
+      price-pointer: /price
+    - name: bybit
+      symbol: BTC/USDT
+      url: "https://api.bybit.com/v5/market/tickers?category=spot&symbol=BTCUSDT"
+      interval: 2s
+      price-pointer: /result/list/0/lastPrice
+    - name: okx
+      symbol: BTC/USDT
+      url: "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT"
+      interval: 2s
+      price-pointer: /data/0/last
+    - name: kraken
+      symbol: BTC/USD
+      url: "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
+      interval: 3s
+      price-pointer: /result/XXBTZUSD/c/0
+    - name: coinbase
+      symbol: BTC/USD
+      url: "https://api.coinbase.com/v2/prices/BTC-USD/spot"
+      interval: 3s
+      price-pointer: /data/amount
+    - name: bitstamp
+      symbol: BTC/USD
+      url: "https://www.bitstamp.net/api/v2/ticker/btcusd/"
+      interval: 5s
+      price-pointer: /last
